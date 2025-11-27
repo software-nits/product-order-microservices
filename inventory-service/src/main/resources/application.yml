@@ -1,0 +1,30 @@
+server:
+  port: 7094
+spring:
+  application:
+    name: inventory-service
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/payment_service?useSSL=false
+#    username: root
+#    password: admin@2025
+#    driver-class-name: com.mysql.jdbc.Driver
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        show_sql: true
+rate-limiter:
+  number-of-message: 4
+  duration-to-consume: 40
+  thread-sleep-duration: 1000
+  report-interval: 6000
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
