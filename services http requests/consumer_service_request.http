@@ -1,0 +1,3 @@
+### run batch job
+GET localhost:8082/batch/delete-records
+Accept: application/json
