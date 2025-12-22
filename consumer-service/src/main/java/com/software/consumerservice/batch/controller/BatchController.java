@@ -27,10 +27,10 @@ public class BatchController {
         String jobStatus;
         if (deleteRecordService.isJobRunning()){
             jobStatus = "Job is already running, please try again later.";
-            logger.info("Job is already running, please try again later.");
+            logger.info(jobStatus);
         }else {
             jobStatus =  "Job is not running, please start new job.";
-            deleteRecordService.startLoadJob();
+            deleteRecordService.startJob();
         }
         return new ResponseEntity<>(jobStatus, HttpStatus.OK);
     }

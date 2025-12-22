@@ -17,7 +17,7 @@ public class DeleteRecordReader implements ItemReader<DeleteData> {
 
     private GDDUResponse deleteData;
     private boolean hasNext;
-    private boolean firstRequestSent;
+    private boolean firstRequestSent = true;
     private int nextPage;
     private boolean pageable;
     private int count=0;
@@ -30,6 +30,7 @@ public class DeleteRecordReader implements ItemReader<DeleteData> {
     public DeleteData read() {
         logger.info("Reading {} data from DB", count++);
         if (canSendRequest()){
+            firstRequestSent = false;
             deleteData = deleteRecordService.fetchData();
             if (deleteData != null){
                 hasNext = !deleteData.isLast();
@@ -43,6 +44,6 @@ public class DeleteRecordReader implements ItemReader<DeleteData> {
         return nextDelete;
     }
     private boolean canSendRequest(){
-        return firstRequestSent || (pageable && this.deleteData.getContent().isEmpty() && this.hasNext);
+        return firstRequestSent || ( this.deleteData.getContent().isEmpty() && this.hasNext);
     }
 }
